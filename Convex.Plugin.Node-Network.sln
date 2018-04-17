@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convex.Plugin.Node-Network", "Convex.Plugin.Node-Network\Convex.Plugin.Node-Network.csproj", "{F2D71788-2E72-4E4B-BAA9-70ADF3BA4161}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2D71788-2E72-4E4B-BAA9-70ADF3BA4161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D71788-2E72-4E4B-BAA9-70ADF3BA4161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D71788-2E72-4E4B-BAA9-70ADF3BA4161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D71788-2E72-4E4B-BAA9-70ADF3BA4161}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FA420B7-B7BF-487A-A701-7CFAA946C013}
+	EndGlobalSection
+EndGlobal
