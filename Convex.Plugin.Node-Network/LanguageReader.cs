@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Reflection;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Convex.Event;
+using Convex.IRC.ComponentModel.Event;
+using Convex.IRC.ComponentModel.Reference;
 using Convex.Plugin.Event;
+using Convex.Plugin.Registrar;
+using NodeNetwork;
 
 namespace Convex.Plugin.Node_Network {
     public class LanguageReader : IPlugin {
@@ -15,28 +18,41 @@ namespace Convex.Plugin.Node_Network {
         public string Id => Guid.NewGuid().ToString();
         public PluginStatus Status { get; private set; } = PluginStatus.Stopped;
 
+        private NodeNetwork<string> Network { get; set; }
+
         #endregion
 
         #region INTERFACE IMPLEMENTATION
 
         public async Task Start() {
-            throw new NotImplementedException();
+            Network = new NodeNetwork<string>();
+
+            await DoCallback(this, new PluginActionEventArgs(PluginActionType.RegisterMethod, new MethodRegistrar<ServerMessagedEventArgs>(ProcessText, args => true, Commands.PRIVMSG, null), Name));
         }
 
         public async Task Stop() {
-            if (Status.Equals(PluginStatus.Running) || Status.Equals(PluginStatus.Processing)) {
+            if (Status.Equals(PluginStatus.Running) || Status.Equals(PluginStatus.Processing))
                 await Log($"Stop called but process is still running from: {Name}");
-            } else {
+            else
                 await Log($"Plugin stopped: {Name}");
-            }
         }
 
-        public async Task Call_Die() {
+        public async Task CallDie() {
             Status = PluginStatus.Stopped;
             await Log($"Calling die, stopping processes —— plugin: {Name}");
         }
 
         public event AsyncEventHandler<PluginActionEventArgs> Callback;
+
+        #endregion
+
+        #region REGISTRARS
+
+        private Task ProcessText(ServerMessagedEventArgs args) {
+            Network.ProcessInput(args.Message.SplitArgs.ToArray());
+
+            return Task.CompletedTask;
+        }
 
         #endregion
 
