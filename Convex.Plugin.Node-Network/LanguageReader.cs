@@ -13,7 +13,7 @@ namespace Convex.Plugin.Node_Network {
         public string Author => "Antonio DiNostri";
         public Version Version => new AssemblyName(GetType().GetTypeInfo().Assembly.FullName).Version;
         public string Id => Guid.NewGuid().ToString();
-        public PluginStatus Status { get; } = PluginStatus.Stopped;
+        public PluginStatus Status { get; private set; } = PluginStatus.Stopped;
 
         #endregion
 
@@ -32,7 +32,8 @@ namespace Convex.Plugin.Node_Network {
         }
 
         public async Task Call_Die() {
-            throw new NotImplementedException();
+            Status = PluginStatus.Stopped;
+            await Log($"Calling die, stopping processes —— plugin: {Name}");
         }
 
         public event AsyncEventHandler<PluginActionEventArgs> Callback;
